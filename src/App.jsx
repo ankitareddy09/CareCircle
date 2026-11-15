@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import VoiceCare from "./pages/Voicek";
 
 const initialData = {
   medicines: [
@@ -810,11 +811,12 @@ export default function App() {
     ? Math.round(completed / data.medicines.length * 100)
     : 0;
 
-  const navItems = user?.role === "Family"
-    ? [["Dashboard", "⌂"], ["Care Updates", "♡"], ["Medicines", "✚"], ["Appointments", "▣"], ["Caregivers", "♧"], ["Care Notes", "✎"]]
-    : user?.role === "Caregiver"
-      ? [["Dashboard", "⌂"], ["Care Tasks", "✓"], ["Appointments", "▣"], ["Care Notes", "✎"], ["Profile", "♙"]]
-      : [["Dashboard", "⌂"], ["Medicines", "✚"], ["Appointments", "▣"], ["Health Records", "▤"], ["Find Caregivers", "♧"], ["Emergency Card", "♥"], ["Profile", "♙"]];
+  
+const navItems = user?.role === "Family"
+  ? [["Dashboard", "⌂"], ["Care Updates", "♡"], ["Medicines", "✚"], ["Appointments", "▣"], ["Caregivers", "♧"], ["Care Notes", "✎"]]
+  : user?.role === "Caregiver"
+    ? [["Dashboard", "⌂"], ["Care Tasks", "✓"], ["Appointments", "▣"], ["Care Notes", "✎"], ["Profile", "♙"]]
+    : [["Dashboard", "⌂"], ["Medicines", "✚"], ["Voice Care", "🎙"], ["Appointments", "▣"], ["Health Records", "▤"], ["Find Caregivers", "♧"], ["Emergency Card", "♥"], ["Profile", "♙"]];
 
   const Header = () => (
     <header className="cc-header">
@@ -1099,6 +1101,13 @@ export default function App() {
     switch (page) {
       case "Dashboard":
         return Dashboard();
+            case "Voice Care":
+      return (
+        <VoiceCare
+          medicines={data.medicines}
+          onConfirmMedicine={toggleMedicine}
+        />
+      );
 
       case "Medicines":
         return (
